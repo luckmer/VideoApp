@@ -1,10 +1,11 @@
 import { Fragment } from "react";
-import { NavBar } from "../Components";
+import { NavBar, Modals } from "../Components";
 
 const VideoApp = () => {
   return (
     <Fragment>
       <NavBar />
+      <Modals />
     </Fragment>
   );
 };
