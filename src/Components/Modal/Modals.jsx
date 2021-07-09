@@ -1,48 +1,22 @@
-import { useState } from "react";
 import { Navbar, NavItem, Container } from "reactstrap";
-import { fetchMovieById } from "../../reducers/MovieSlice";
 import { InputGroup, InputGroupAddon } from "reactstrap";
-import { Button, Form, Input } from "reactstrap";
 import PaginationPage from "../Pagination/Pagination";
+import { Button, Form, Input } from "reactstrap";
 import { useDispatch } from "react-redux";
 import Buttons from "../Button/Buttons";
+import { ModalHook } from "./ModalHook";
 
 const Modals = ({ pages }) => {
-  const [link, setLink] = useState("");
-  const [error, setError] = useState("");
   const dispatch = useDispatch();
+
+  const { handleChange, handleSubmit, link, error } = ModalHook(dispatch);
+
   const CustomStyle = {
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
     flexFlow: " row wrap",
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (link.trim().length > 0 && link.trim() !== "") {
-      const blocker = link.toString().match(/https:\/\/(:?www.)?(\w*)/);
-      if (blocker !== null) {
-        if (
-          blocker[2] === "youtu" ||
-          blocker[2] === "vimeo" ||
-          blocker[2] === "youtube"
-        ) {
-          dispatch(fetchMovieById(link));
-          setLink("");
-          setError("");
-        }
-      }
-
-      if (blocker === null) {
-        setError("incorrect link");
-        setLink("");
-      }
-    }
-  };
-
-  const handleChange = (e) => setLink(e.target.value);
 
   return (
     <Navbar color="dark">
