@@ -32,4 +32,11 @@
 ![](https://imgur.com/lIsRTEC.png)
 
 
+## instalation
+
++ clone repo 
++ in command line write npm install 
+
+
+
 
