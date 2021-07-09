@@ -8,6 +8,7 @@ const ApiFunctionality = (setFilterResult) => {
   const [modalData, setModalData] = useState({
     modal: "",
   });
+
   const state = useSelector((state) => state.movie.movies);
   const likes = useSelector((state) => state.movie.liked);
   const filters = useSelector((state) => state.buttonPanel.filterType);
@@ -49,7 +50,6 @@ const ApiFunctionality = (setFilterResult) => {
   const toggle = () => setModal(!modal);
 
   const handleSetupModal = (data) => {
-    console.log(data);
     const modal = data.embedHtml;
 
     if (modal) setModalData({ modal });
