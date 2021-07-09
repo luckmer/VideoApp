@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   type: "tile",
+  demo: "",
   filterType: {
     favorite: "",
     data: "",
@@ -15,6 +16,10 @@ const ButtonSlice = createSlice({
     setClickType: (state, action) => {
       const { view } = action.payload;
       state.type !== view ? (state.type = view) : (state.type = "tile");
+    },
+
+    SetDemoMode: (state, action) => {
+      state.demo = action.payload;
     },
 
     SetFilterType: (state, action) => {
@@ -45,6 +50,6 @@ const ButtonSlice = createSlice({
   },
 });
 
-export const { SetFilterType, setClickType } = ButtonSlice.actions;
+export const { SetFilterType, setClickType, SetDemoMode } = ButtonSlice.actions;
 
 export default ButtonSlice.reducer;
