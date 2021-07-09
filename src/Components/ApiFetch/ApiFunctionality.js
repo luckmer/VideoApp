@@ -1,20 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { SetLikedMovie, SetDeleteMovie } from "../../reducers/MovieSlice";
 
 const ApiFunctionality = (setFilterResult) => {
+  const [modal, setModal] = useState(false);
+  const [modalData, setModalData] = useState({
+    modal: "",
+  });
   const state = useSelector((state) => state.movie.movies);
   const likes = useSelector((state) => state.movie.liked);
   const filters = useSelector((state) => state.buttonPanel.filterType);
+  const type = useSelector((state) => state.buttonPanel.type);
 
   const dispatch = useDispatch();
-
-  const CustomStyle = {
-    display: "flex",
-    paddingTop: "20px",
-    justifyContent: "center",
-  };
 
   const handleSave = (id, color) => {
     dispatch(SetLikedMovie({ like: id, color: color }));
@@ -47,7 +46,43 @@ const ApiFunctionality = (setFilterResult) => {
     setFilterResult(FilterS);
   }, [state, filters, likes, setFilterResult]);
 
-  return { CustomStyle, likes, handleSave, handleDelete };
+  const toggle = () => setModal(!modal);
+
+  const handleSetupModal = (data) => {
+    console.log(data);
+    const modal = data.embedHtml;
+
+    if (modal) setModalData({ modal });
+    setModal(true);
+  };
+
+  const CustomStyle = {
+    display: "flex",
+    paddingTop: "20px",
+    justifyContent: "center",
+  };
+
+  const CustomBody = {
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
+    flexFlow: " row wrap",
+  };
+
+  const PROPS = {
+    CustomStyle,
+    likes,
+    handleSave,
+    handleDelete,
+    type,
+    modalData,
+    CustomBody,
+    handleSetupModal,
+    toggle,
+    modal,
+  };
+
+  return PROPS;
 };
 
 export default ApiFunctionality;

@@ -1,7 +1,11 @@
 import { ButtonGroup, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovieById } from "../../reducers/MovieSlice";
-import { SetFilterType, setClickType } from "../../reducers/ButtonSlice";
+import {
+  SetFilterType,
+  setClickType,
+  SetDemoMode,
+} from "../../reducers/ButtonSlice";
 import { SetClearArray } from "../../reducers/MovieSlice";
 import Demo from "../../hooks/Examples";
 
@@ -22,6 +26,7 @@ const Buttons = () => {
     if (target === "clear") dispatch(SetClearArray());
     if (target === "row") dispatch(setClickType({ view: target }));
     dispatch(SetFilterType({ type: target, color: color }));
+    dispatch(SetDemoMode(target));
   };
 
   const CustomStyle = {
